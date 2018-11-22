@@ -2,24 +2,24 @@
 <view class="container">
   <view class="menu">
     <view class=".menu-content">
-      <view class="menu-content-item" wx:for-items="{{array}}" wx:for-item="item" wx:key="imgName">
+      <view class="menu-content-item" wx:for-items="{{array}}" wx:for-item="item" wx:key="id">
         <view style="padding:5px">
           <image id="{{item.index}}" bindlongtap='switchCalMode' style="width: 100%; height: 100px; background-color: #eeeeee;" mode="{{item.mode}}" src="{{item.src}}"></image>
         </view>
         <view style="padding:5px">
           <view wx:if="{{isShowCalMode}}" style="display:flex; justify-content: space-around">
-              <view class='wpn-btn' id="{{item.imgName}}" bindtap="minus"  style="width:40px; text-align:center">
+              <view class='wpn-btn' id="{{item.id}}" bindtap="minus"  style="width:40px; text-align:center">
                 <text style="font-size:20px;" class="iconfont icon-jian-xianxingyuankuang"></text>
               </view>
               <view  style="width:40px; line-height:20px;text-align:center">
-                <input id="{{item.imgName}}" bindinput="bindKeyInput" type="number" value="{{item.count}}"/>
+                <input id="{{item.id}}" bindinput="bindKeyInput" type="number" value="{{item.count}}"/>
               </view>
-              <view class='wpn-btn' id="{{item.imgName}}" bindtap="plus"  style="width:40px;text-align:center">
+              <view class='wpn-btn' id="{{item.id}}" bindtap="plus"  style="width:40px;text-align:center">
                 <text style="font-size:20px;" class="iconfont icon-jia-xianxingyuankuang"></text>
               </view>
             </view>
           <view style="display:flex;flex-direction:row;justify-content: space-between">
-            <text style="font-size:14px">{{item.index+1}}.{{item.name}}</text>
+            <text style="font-size:14px">{{item.index + 1}}.{{item.name}}</text>
             
           </view>
           <text style="color:red;font-size:12px">{{item.price}}</text><text style="font-size:12px">元/{{item.unit}}/{{item.spec}}</text>
