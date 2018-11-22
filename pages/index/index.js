@@ -1,12 +1,11 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const allData = require('./data.js'); 
 Page({
   data: {
     isShowCalMode: true,
     totalPrice: 0,
-    array: allData.map((e,i) => ({ index: i, count: 0, mode: 'widthFix', ...e })),
+    array: [],
     recInfo: {
       recName: null,
       recMobile: null,
@@ -147,6 +146,28 @@ Page({
   onLoad: function () {
     wx.setNavigationBarTitle({
       title: '歪婆娘私房菜'
+    })
+    wx.request({
+      url: 'https://www.waiponiang.com/wpn',
+      success: (res) => {
+        const data = res.data.data
+        const compare = property => {
+          return function (obj1, obj2) {
+            var value1 = obj1[property];
+            var value2 = obj2[property];
+            return value1 - value2;
+          };
+        };
+        let d = data.sort(compare("index"))
+        d = d.filter(e => e.checked === 1)
+        d = d.map((e,i) => {
+          e.index = i
+          return { count: 0, mode: 'widthFix', ...e }
+        })
+        this.setData({
+          array: d,
+        })
+      }
     })
     if (app.globalData.userInfo) {
       this.setData({
